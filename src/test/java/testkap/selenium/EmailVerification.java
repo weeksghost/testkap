@@ -9,9 +9,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class EmailVerification {
 
+    // Create webdriver object
     static WebDriver driver;
+
+    // Create object for business functions
     static EmailVerifyFunctions professor;
 
+    // Make sure this runs before the first test method
     @BeforeClass
     public static void before()
     {
@@ -20,6 +24,8 @@ public class EmailVerification {
                    "&.lang=en-US&.done=https%3a//mail.yahoo.com");
         professor = new EmailVerifyFunctions(driver);
     }
+
+    // Make sure this runs after all test methods have run
     @AfterClass
     public static void after()
     {
@@ -27,13 +33,17 @@ public class EmailVerification {
         driver = null;
     }
 
+    // Begin test method
     @Test(description = "Login to Yahoo email and assert predefined values")
     public void EmailVerifyConetnts()
     {
+        // Login to Yahoo mail
         professor.login("professorkaplan@yahoo.com", "abc123$");
-        professor.messageListClick();
-        professor.waitForElement();
 
+        // Call message scan, select, subject and body read function
+        professor.messageListClick();
+
+        // Assert expected values from email subject and body
         Assert.assertEquals("Welcome to Yahoo! Kaplan", professor.messageSubject());
         Assert.assertTrue(professor.messageBody(), "thank you for choosing Yahoo");
 

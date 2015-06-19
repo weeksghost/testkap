@@ -10,14 +10,17 @@ import java.util.List;
 
 public class EmailVerifyFunctions {
 
+    // Create webdriver instance
     static WebDriver driver;
 
+    // Constructor class
     public EmailVerifyFunctions(WebDriver driver) {
 
         this.driver = driver;
 
     }
 
+    // Email login function
     public void login(String email, String password) {
 
         driver.findElement(By.id("login-username")).sendKeys(email);
@@ -29,6 +32,7 @@ public class EmailVerifyFunctions {
 
     }
 
+    // Get list of messages in inbox, loop over then click on desired message
     public void messageListClick() {
 
         List<WebElement> latestEmail = driver.findElements(By
@@ -49,6 +53,7 @@ public class EmailVerifyFunctions {
             }
         }
 
+    // Return part of text from email Subject field
     public String messageSubject() {
 
         new WebDriverWait(driver, 30)
@@ -63,6 +68,7 @@ public class EmailVerifyFunctions {
 
     }
 
+    // Return part of text from email body
     public boolean messageBody() {
 
         WebElement emailBody = driver.findElement(By.
@@ -75,6 +81,7 @@ public class EmailVerifyFunctions {
 
     }
 
+    // Pause helper function
     public void waitForElement()
     {
 
